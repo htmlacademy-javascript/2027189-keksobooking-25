@@ -1,41 +1,31 @@
 const checkCorrectNumber = (value) => {
-  if (Number.isNaN(value) === true || typeof value !== 'number' || Number.isFinite(value) !== true) {
+  if (!Number.isFinite(value)) {
     throw new RangeError('Числа должны быть положительными или 0.');
   }
 
   if (value < 0) {
-    value = 0;
-  } else if (value > Number.MAX_SAFE_INTEGER) {
-    value = Number.MAX_SAFE_INTEGER;
+    return 0;
+  }
+
+  if (value > Number.MAX_SAFE_INTEGER) {
+    return Number.MAX_SAFE_INTEGER;
   }
 
   return value;
 };
 
 const getRandomNumber = (minNum = 0, maxNum = Number.MAX_SAFE_INTEGER, accuracy = 0) => {
-  try {
-    minNum = checkCorrectNumber(minNum);
-    maxNum = checkCorrectNumber(maxNum);
-    accuracy = checkCorrectNumber(accuracy);
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.log(error.name);
-    // eslint-disable-next-line no-console
-    console.log(error.message);
-  }
+  let minCheckedNum = checkCorrectNumber(minNum);
+  let maxCheckedNum = checkCorrectNumber(maxNum);
+  const checkedAccuracy = checkCorrectNumber(accuracy);
 
+  [minCheckedNum, maxCheckedNum] = minCheckedNum > maxCheckedNum ? [maxCheckedNum, minCheckedNum] : [minCheckedNum, maxCheckedNum];
 
-  if (minNum > maxNum) {
-    const currentNum = minNum;
-    minNum = maxNum;
-    maxNum = currentNum;
-  }
-
-  const diff = maxNum - minNum;
+  const diff = maxCheckedNum - minCheckedNum;
   const random = Math.random() * 1.000000000000001; // чтобы могла выпасть единица
-  const factor = Math.pow(10, accuracy);
+  const factor = Math.pow(10, checkedAccuracy);
 
-  return Math.round((random * diff + minNum) * factor) / factor;
+  return Math.round((random * diff + minCheckedNum) * factor) / factor;
 };
 
 
