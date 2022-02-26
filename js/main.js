@@ -32,7 +32,7 @@ const  getRandomUnsignedInteger = (minNum = 0, maxNum = Number.MAX_SAFE_INTEGER)
 
 const getRandomUnsignedFloat = (minNum = 0, maxNum = Number.MAX_SAFE_INTEGER, accuracy = 0) => getRandomNumber(minNum, maxNum, accuracy);
 
-const INFO_ADVERTS = [
+const APARTMENT_INFO = [
   {
     title: 'Onyx Hotel Miami AirportОткроется в новом окне',
     description: 'Отель расположен в городе Майами-Спрингс, штат Флорида, в 4,8 км от международного аэропорта Майами и в 3,2 км от поля для гольфа Melreese.',
@@ -53,11 +53,31 @@ const INFO_ADVERTS = [
     title: 'Holiday Inn Miami International Airport, an IHG HotelОткроется в новом окне',
     description: 'В отеле предоставляются многочисленные бесплатные услуги, в том числе круглосуточный трансфер до Международного аэропорта Майами и работает ресторан.',
   },
+  {
+    title: 'Hampton Inn Miami-Coconut Grove/Coral Gables',
+    description: 'Этот отель расположен в старинном живописном районе Коконат-Гроув в предместье Майами, всего в 10 км от парка Хисторик Вирджиния Ки Бич.',
+  },
+  {
+    title: 'SpringHill Suites Miami Airport South',
+    description: 'Отель SpringHill Suites Miami Airport South расположен в 10 минутах езды от международного аэропорта Майами. К услугам гостей бесплатный трансфер от/до аэропорта и трансфер в радиусе 3,2 км от отеля.',
+  },
+  {
+    title: 'Nuvo Suites Hotel - Miami / DoralОткроется в новом окне',
+    description: 'Эти современные люксы расположены между 2 большими торговыми центрами, в 13 минутах езды от международного аэропорта Майами и 27 минутах езды от города Майами-Бич.',
+  },
+  {
+    title: 'Sonesta Miami Airport',
+    description: 'Just 800 metres from Miami International Airport, Sonesta Miami Airport in Miami, Florida offers convenient services such as free, 24-hour airport shuttle service and free Wi-Fi in all guest rooms.',
+  },
+  {
+    title: 'Hampton Inn & Suites Miami Wynwood Design District, FL',
+    description: 'Отель Miami Midtown, FL сети Hampton Inn & Suites расположен в районе Дизайн-Дистрикт в Майами, в 7 км от центра и в 8 км от порта, обслуживающего круизные суда.',
+  }
 ];
 
 const SIMILAR_ADVERTS_COUNT = 10;
 
-const TYPE_ADVERTS = [
+const APARTMENT_TYPE = [
   'palace',
   'flat',
   'house',
@@ -65,13 +85,13 @@ const TYPE_ADVERTS = [
   'hotel',
 ];
 
-const CHECKIN_CHECKOUT_ADVERTS = [
+const APARTMENT_CHECKIN_CHECKOUT = [
   '12:00',
   '13:00',
   '14:00',
 ];
 
-const FEATURES_ADVERTS = [
+const FACILITIES_TYPE = [
   'wifi',
   'dishwasher',
   'parking',
@@ -80,76 +100,79 @@ const FEATURES_ADVERTS = [
   'conditioner',
 ];
 
-const PHOTOS_ADVERTS = [
+const APARTMENT_PHOTOS = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
 ];
 
-const locationLat = getRandomUnsignedFloat(35.65000, 35.70000, 5);
-const locationLng = getRandomUnsignedFloat(139.70000, 139.80000, 5);
+const getRandomItemFrom = (array) => array[getRandomUnsignedInteger(0, array.length - 1)];
 
-const getRandomElement = (element) => element[getRandomUnsignedInteger(0, element.length - 1)];
+const getAvatarAdvertPath = (indexItem) => `img/avatars/user${indexItem.toString().padStart(2, '0')}.png`;
 
-const getAvatarAdvertPath = () => {
-  const randomNum = getRandomUnsignedInteger(1, 10);
-  return `img/avatars/user${randomNum !== 10 ? `0${randomNum}` : randomNum}.png`;
-};
-
-const getFeatures = (features) => {
-  const featuresList = [];
-  const maxCountFeatures = getRandomUnsignedInteger(1, features.length - 1);
-  let countContinue = 0;
-
-  for (let i = 0; i < maxCountFeatures; i++) {
-    const randomFeature = getRandomElement(features);
-
-    if (featuresList.some((value) => value.includes(randomFeature))) {
-      countContinue++;
-      continue;
-    }
-
-    featuresList[i - countContinue] = randomFeature;
-  }
-
-  return featuresList;
+const getFacilities = (facilities) => {
+  const maxCountFacilities = getRandomUnsignedInteger(1, facilities.length);
+  const facilitiesList = facilities.map((element) => [Math.random(), element]).sort().map((element) => element[1]);
+  return facilitiesList.slice(facilities.length - maxCountFacilities);
 };
 
 const getPhotos = (photos) => {
   const photosList = [];
-  const maxCountPhotos = getRandomUnsignedInteger(1, 10);
+  const maxCountPhotos = getRandomUnsignedInteger(1, 15);
+  let currentPhotos = 0;
 
   for (let i = 0; i < maxCountPhotos; i++) {
-    photosList[i] = getRandomElement(photos);
+    photosList[i] = APARTMENT_PHOTOS[currentPhotos];
+
+    if (currentPhotos === photos.length - 1) {
+      currentPhotos = 0;
+    } else {
+      currentPhotos++;
+    }
   }
 
   return photosList;
 };
 
-const createAdvert = () => ({
-  author: {
-    avatar: getAvatarAdvertPath(),
-  },
-  offer: {
-    title: getRandomElement(INFO_ADVERTS).title,
-    address: `${locationLat}, ${locationLng}`,
-    price: getRandomUnsignedInteger(1, 5000),
-    type: getRandomElement(TYPE_ADVERTS),
-    rooms: getRandomUnsignedInteger(1, 10),
-    guests: getRandomUnsignedInteger(1, 20),
-    checkin: getRandomElement(CHECKIN_CHECKOUT_ADVERTS),
-    checkout: getRandomElement(CHECKIN_CHECKOUT_ADVERTS),
-    features: getFeatures(FEATURES_ADVERTS),
-    description: getRandomElement(INFO_ADVERTS).description,
-    photos: getPhotos(PHOTOS_ADVERTS),
-  },
-  location: {
-    lat: locationLat,
-    lng: locationLng,
-  }
-});
+const createAdvert = (avatarPath, advertInfo) => {
+  const locationLat = getRandomUnsignedFloat(35.65000, 35.70000, 5);
+  const locationLng = getRandomUnsignedFloat(139.70000, 139.80000, 5);
 
-const similarAdverts = Array.from({length: SIMILAR_ADVERTS_COUNT}, createAdvert);
+  return {
+    author: {
+      avatar: avatarPath,
+    },
+    offer: {
+      title: advertInfo.title,
+      address: `${locationLat}, ${locationLng}`,
+      price: getRandomUnsignedInteger(1, 5000),
+      type: getRandomItemFrom(APARTMENT_TYPE),
+      rooms: getRandomUnsignedInteger(1, 10),
+      guests: getRandomUnsignedInteger(1, 20),
+      checkin: getRandomItemFrom(APARTMENT_CHECKIN_CHECKOUT),
+      checkout: getRandomItemFrom(APARTMENT_CHECKIN_CHECKOUT),
+      features: getFacilities(FACILITIES_TYPE),
+      description: advertInfo.description,
+      photos: getPhotos(APARTMENT_PHOTOS),
+    },
+    location: {
+      lat: locationLat,
+      lng: locationLng,
+    }
+  };
+};
+
+const createSimilarAdverts = () => {
+  const similarAdverts = [];
+
+  for (let i = 0; i < SIMILAR_ADVERTS_COUNT; i++) {
+    const avatarPath = getAvatarAdvertPath(i + 1);
+    const advertInfo = APARTMENT_INFO[i];
+    similarAdverts[i] = createAdvert(avatarPath, advertInfo);
+  }
+
+  return similarAdverts;
+};
 
 // eslint-disable-next-line no-console
-console.log(similarAdverts);
+console.log(createSimilarAdverts());
