@@ -32,6 +32,8 @@ const  getRandomUnsignedInteger = (minNum = 0, maxNum = Number.MAX_SAFE_INTEGER)
 
 const getRandomUnsignedFloat = (minNum = 0, maxNum = Number.MAX_SAFE_INTEGER, accuracy = 0) => getRandomNumber(minNum, maxNum, accuracy);
 
+const shuffleElements = (array) => array.slice().sort(() => Math.random() - 0.5);
+
 const APARTMENT_INFO = [
   {
     title: 'Onyx Hotel Miami AirportОткроется в новом окне',
@@ -112,26 +114,12 @@ const getAvatarAdvertPath = (indexItem) => `img/avatars/user${indexItem.toString
 
 const getFacilities = (facilities) => {
   const maxCountFacilities = getRandomUnsignedInteger(1, facilities.length);
-  const facilitiesList = facilities.map((element) => [Math.random(), element]).sort().map((element) => element[1]);
-  return facilitiesList.slice(facilities.length - maxCountFacilities);
+  return shuffleElements(facilities).slice(facilities.length - maxCountFacilities);
 };
 
 const getPhotos = (photos) => {
-  const photosList = [];
-  const maxCountPhotos = getRandomUnsignedInteger(1, 15);
-  let currentPhotos = 0;
-
-  for (let i = 0; i < maxCountPhotos; i++) {
-    photosList[i] = APARTMENT_PHOTOS[currentPhotos];
-
-    if (currentPhotos === photos.length - 1) {
-      currentPhotos = 0;
-    } else {
-      currentPhotos++;
-    }
-  }
-
-  return photosList;
+  const totalPhotos = Array.from({length: getRandomUnsignedInteger(1, 5)}, () => [].concat(photos));
+  return totalPhotos.reduce((commonArray, currentArray) => commonArray.concat(currentArray));
 };
 
 const createAdvert = (avatarPath, advertInfo) => {
