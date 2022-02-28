@@ -108,7 +108,7 @@ const APARTMENT_PHOTOS = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
 ];
 
-const getRandomItemFrom = (array) => array[getRandomUnsignedInteger(0, array.length - 1)];
+const getRandomItemFromArray = (array) => array[getRandomUnsignedInteger(0, array.length - 1)];
 
 const getAvatarAdvertPath = (indexItem) => `img/avatars/user${indexItem.toString().padStart(2, '0')}.png`;
 
@@ -119,7 +119,7 @@ const getFacilities = (facilities) => {
 
 const getPhotos = (photos) => {
   const totalPhotos = Array.from({length: getRandomUnsignedInteger(1, 5)}, () => [].concat(photos));
-  return totalPhotos.reduce((commonArray, currentArray) => commonArray.concat(currentArray));
+  return [].concat(...totalPhotos);
 };
 
 const createAdvert = (avatarPath, advertInfo) => {
@@ -134,11 +134,11 @@ const createAdvert = (avatarPath, advertInfo) => {
       title: advertInfo.title,
       address: `${locationLat}, ${locationLng}`,
       price: getRandomUnsignedInteger(1, 5000),
-      type: getRandomItemFrom(APARTMENT_TYPE),
+      type: getRandomItemFromArray(APARTMENT_TYPE),
       rooms: getRandomUnsignedInteger(1, 10),
       guests: getRandomUnsignedInteger(1, 20),
-      checkin: getRandomItemFrom(APARTMENT_CHECKIN_CHECKOUT),
-      checkout: getRandomItemFrom(APARTMENT_CHECKIN_CHECKOUT),
+      checkin: getRandomItemFromArray(APARTMENT_CHECKIN_CHECKOUT),
+      checkout: getRandomItemFromArray(APARTMENT_CHECKIN_CHECKOUT),
       features: getFacilities(FACILITIES_TYPE),
       description: advertInfo.description,
       photos: getPhotos(APARTMENT_PHOTOS),
