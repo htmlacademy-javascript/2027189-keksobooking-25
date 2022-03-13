@@ -1,4 +1,5 @@
+import {createTemplateCards} from './generationTemplate.js';
 import {createSimilarAdverts} from './data.js';
 
-// eslint-disable-next-line no-console
-console.log(createSimilarAdverts());
+createTemplateCards(createSimilarAdverts(), '#map-canvas'); // TODO временно выводим вместо карты
+
