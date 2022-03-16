@@ -1,6 +1,5 @@
 import {getNameApartmentTypeList} from './constants.js';
-import {setStylesList} from './utilStylesGenerationTemplate.js';
-import {getElementFromDocument, getTemplateFromDocument} from './getterGenerationTemplate.js';
+import {getTemplateFromDocument} from './getterGenerationTemplate.js';
 import {
   setTextContent,
   setAvatar,
@@ -9,31 +8,30 @@ import {
   setApartmentType,
 } from './setterGenerationTemplate.js';
 
-const createTemplateCards = (data, placeClass) => {
-  const advertsList = getElementFromDocument(placeClass);
-  setStylesList(advertsList); // TODO для украшательства
-
-  const card = getTemplateFromDocument('#card', '.popup');
-  const carsFragment = document.createDocumentFragment();
-
-  data.forEach(({author, offer}) => {
-    const newCard = card.cloneNode(true);
-
-    setTextContent(newCard, '.popup__title', offer.title);
-    setTextContent(newCard, '.popup__text--address', offer.address);
-    setTextContent(newCard, '.popup__text--price', `${offer.price} ₽/ночь`);
-    setTextContent(newCard, '.popup__text--capacity',  `${offer.rooms} комнаты для ${offer.guests} гостей`);
-    setTextContent(newCard, '.popup__text--time',  `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`);
-    setTextContent(newCard, '.popup__description',  offer.description);
-    setAvatar(newCard, '.popup__avatar', author.avatar);
-    setApartmentPhotos(newCard,'.popup__photos', offer.photos);
-    setFacilitiesType(newCard, '.popup__features', offer.features);
-    setApartmentType(newCard, '.popup__type', offer.type, getNameApartmentTypeList());
-
-    carsFragment.append(newCard);
-  });
-
-  advertsList.append(carsFragment);
+const createTemplateCard = (author, offer) => {
+  const cardTemplate = getTemplateFromDocument('#card', '.popup');
+  const cloneCardTemplate = cardTemplate.cloneNode(true);
+  setTextContent(cloneCardTemplate, '.popup__title', offer.title);
+  setTextContent(cloneCardTemplate, '.popup__text--address', offer.address);
+  setTextContent(cloneCardTemplate, '.popup__text--price', `${offer.price} ₽/ночь`);
+  setTextContent(cloneCardTemplate, '.popup__text--capacity',  `${offer.rooms} комнаты для ${offer.guests} гостей`);
+  setTextContent(cloneCardTemplate, '.popup__text--time',  `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`);
+  setTextContent(cloneCardTemplate, '.popup__description',  offer.description);
+  setAvatar(cloneCardTemplate, '.popup__avatar', author.avatar);
+  setApartmentPhotos(cloneCardTemplate,'.popup__photos', offer.photos);
+  setFacilitiesType(cloneCardTemplate, '.popup__features', offer.features);
+  setApartmentType(cloneCardTemplate, '.popup__type', offer.type, getNameApartmentTypeList());
+  return cloneCardTemplate;
 };
 
-export {createTemplateCards};
+const createTemplateCards = (cardData) => {
+  const carsFragment = document.createDocumentFragment();
+
+  cardData.forEach(({author, offer}) => {
+    carsFragment.append(createTemplateCard(author, offer));
+  });
+
+  return carsFragment;
+};
+
+export {createTemplateCards, createTemplateCard};
