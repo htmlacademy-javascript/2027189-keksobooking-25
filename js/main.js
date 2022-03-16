@@ -1,4 +1,6 @@
+import {createTemplateCard} from './generationTemplate.js';
 import {createSimilarAdverts} from './data.js';
+import {getElementFromDocument} from './getterGenerationTemplate.js';
 
-// eslint-disable-next-line no-console
-console.log(createSimilarAdverts());
+const placeExample = getElementFromDocument('#map-canvas');
+placeExample.append(createTemplateCard(createSimilarAdverts()[0].author, createSimilarAdverts()[0].offer));

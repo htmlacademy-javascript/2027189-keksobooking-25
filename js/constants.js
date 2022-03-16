@@ -51,6 +51,14 @@ const APARTMENT_TYPE = [
   'hotel',
 ];
 
+const APARTMENT_NAME_TYPE = {
+  palace: 'Дворец',
+  flat: 'Квартира',
+  house: 'Дом',
+  bungalow: 'Бунгало',
+  hotel: 'Отель',
+};
+
 const APARTMENT_CHECKIN_CHECKOUT = [
   '12:00',
   '13:00',
@@ -75,6 +83,7 @@ const APARTMENT_PHOTOS = [
 const getApartmentInfoList = () => APARTMENT_INFO;
 const getSimilarAdvertsCount = () => SIMILAR_ADVERTS_COUNT;
 const getApartmentTypeList = () => APARTMENT_TYPE;
+const getNameApartmentTypeList = () => APARTMENT_NAME_TYPE;
 const getApartmentCheckinCheckoutList = () => APARTMENT_CHECKIN_CHECKOUT;
 const getFacilitiesTypeList = () => FACILITIES_TYPE;
 const getApartmentPhotosList = () => APARTMENT_PHOTOS;
@@ -86,4 +95,5 @@ export {
   getApartmentCheckinCheckoutList,
   getFacilitiesTypeList,
   getApartmentPhotosList,
+  getNameApartmentTypeList,
 };
