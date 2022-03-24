@@ -14,10 +14,18 @@ const setValidateAdvertForm = () => {
   pristineForm.addValidator(roomsField, checkValidRooms, setInvalidMessageRoom);
   pristineForm.addValidator(capacityField, checkValidRooms, setInvalidMessageCapacity);
 
+  roomsField.addEventListener('change', () => {
+    pristineForm.validate(capacityField);
+  });
+
+  capacityField.addEventListener('change', () => {
+    pristineForm.validate(roomsField);
+  });
+
   advertForm.addEventListener('submit', (evt) => {
-    if (!pristineForm.validate()) {
-      evt.preventDefault();
-    }
+    evt.preventDefault();
+    // eslint-disable-next-line no-console
+    console.log(pristineForm.validate());
   });
 };
 

@@ -119,10 +119,12 @@
           <input id="price"
                  name="price"
                  type="number"
+                 min="0"
                  max="100000"
                  placeholder="5000"
                  required
                  data-pristine-required-message="Обязательное поле"
+                 data-pristine-min-message="Минимальное значение 0"
                  data-pristine-max-message="Максимальное значение 100 000">
           <div class="ad-form__slider"></div>
         </fieldset>
