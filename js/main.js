@@ -1,6 +1,12 @@
 import {createTemplateCard} from './generationTemplate.js';
 import {createSimilarAdverts} from './data.js';
 import {getElementFromDocument} from './getterGenerationTemplate.js';
+import {setValidateAdvertForm} from './advertForm/advertForm.js';
+
 
 const placeExample = getElementFromDocument('#map-canvas');
-placeExample.append(createTemplateCard(createSimilarAdverts()[0].author, createSimilarAdverts()[0].offer));
+const [{author, offer}] = createSimilarAdverts();
+
+placeExample.append(createTemplateCard(author, offer));
+
+setValidateAdvertForm();

@@ -80,6 +80,13 @@ const APARTMENT_PHOTOS = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
 ];
 
+const ROOMS_OPTION = {
+  1: [1],
+  2: [1, 2],
+  3: [1, 2, 3],
+  100: [0],
+};
+
 const getApartmentInfoList = () => APARTMENT_INFO;
 const getSimilarAdvertsCount = () => SIMILAR_ADVERTS_COUNT;
 const getApartmentTypeList = () => APARTMENT_TYPE;
@@ -87,6 +94,7 @@ const getNameApartmentTypeList = () => APARTMENT_NAME_TYPE;
 const getApartmentCheckinCheckoutList = () => APARTMENT_CHECKIN_CHECKOUT;
 const getFacilitiesTypeList = () => FACILITIES_TYPE;
 const getApartmentPhotosList = () => APARTMENT_PHOTOS;
+const getRoomsOption = () => ROOMS_OPTION;
 
 export {
   getApartmentInfoList,
@@ -96,4 +104,5 @@ export {
   getFacilitiesTypeList,
   getApartmentPhotosList,
   getNameApartmentTypeList,
+  getRoomsOption,
 };
