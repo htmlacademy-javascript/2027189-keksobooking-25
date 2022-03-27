@@ -4,10 +4,10 @@ import {configPristineAdvertFrom} from './advertFormPristineConfig.js';
 import {getValidStatus} from './gettersAdvertForm.js';
 import {getRoomsOption} from '../../constants.js';
 import {
-  setDisabledFields,
+  setDisabledElements,
   setDisabledModifierClass,
   setActiveModifierClass,
-  setActiveFields,
+  setActiveElements,
 } from '../settersForms.js';
 
 const advertForm = getElementFromDocument('.ad-form');
@@ -39,12 +39,12 @@ const setValidateAdvertForm = () => {
 
 const setDisabledAdvertForm = () => {
   setDisabledModifierClass(advertForm);
-  setDisabledFields(advertFormFields);
+  setDisabledElements(advertFormFields);
 };
 
 const setActiveAdvertForm = () => {
   setActiveModifierClass(advertForm);
-  setActiveFields(advertFormFields);
+  setActiveElements(advertFormFields);
 };
 
 export {

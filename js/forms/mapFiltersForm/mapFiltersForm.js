@@ -1,9 +1,9 @@
 import {getElementFromDocument} from '../../getterGenerationTemplate.js';
 import {
-  setDisabledFields,
+  setDisabledElements,
   setDisabledModifierClass,
   setActiveModifierClass,
-  setActiveFields,
+  setActiveElements,
 } from '../settersForms.js';
 
 const mapFiltersForm = getElementFromDocument('.map__filters');
@@ -12,14 +12,14 @@ const mapFiltersFormFields = mapFiltersForm.querySelectorAll('fieldset');
 
 const setDisabledMapFiltersForm = () => {
   setDisabledModifierClass(mapFiltersForm);
-  setDisabledFields(mapFiltersFormSelects);
-  setDisabledFields(mapFiltersFormFields);
+  setDisabledElements(mapFiltersFormSelects);
+  setDisabledElements(mapFiltersFormFields);
 };
 
 const setActiveMapFiltersForm = () => {
   setActiveModifierClass(mapFiltersForm);
-  setActiveFields(mapFiltersFormSelects);
-  setActiveFields(mapFiltersFormFields);
+  setActiveElements(mapFiltersFormSelects);
+  setActiveElements(mapFiltersFormFields);
 };
 
 export {
