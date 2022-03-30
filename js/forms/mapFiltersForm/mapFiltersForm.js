@@ -1,23 +1,23 @@
 import {getElementFromDocument} from '../../getterGenerationTemplate.js';
 import {
   setDisabledElements,
-  setDisabledModifierClass,
-  setActiveModifierClass,
   setActiveElements,
+  toggledDisabledModifierClass,
 } from '../settersForms.js';
 
 const mapFiltersForm = getElementFromDocument('.map__filters');
+const mapFiltersFormDisabledClasses = 'map__filters--disabled';
 const mapFiltersFormSelects = mapFiltersForm.querySelectorAll('.map__filter');
 const mapFiltersFormFields = mapFiltersForm.querySelectorAll('fieldset');
 
 const setDisabledMapFiltersForm = () => {
-  setDisabledModifierClass(mapFiltersForm);
+  toggledDisabledModifierClass(mapFiltersForm, mapFiltersFormDisabledClasses, true);
   setDisabledElements(mapFiltersFormSelects);
   setDisabledElements(mapFiltersFormFields);
 };
 
 const setActiveMapFiltersForm = () => {
-  setActiveModifierClass(mapFiltersForm);
+  toggledDisabledModifierClass(mapFiltersForm, mapFiltersFormDisabledClasses, false);
   setActiveElements(mapFiltersFormSelects);
   setActiveElements(mapFiltersFormFields);
 };

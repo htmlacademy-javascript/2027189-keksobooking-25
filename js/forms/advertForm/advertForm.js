@@ -5,12 +5,12 @@ import {getValidStatus} from './gettersAdvertForm.js';
 import {getRoomsOption} from '../../constants.js';
 import {
   setDisabledElements,
-  setDisabledModifierClass,
-  setActiveModifierClass,
   setActiveElements,
+  toggledDisabledModifierClass,
 } from '../settersForms.js';
 
 const advertForm = getElementFromDocument('.ad-form');
+const advertFormDisabledClasses = 'ad-form--disabled';
 const advertFormFields = advertForm.querySelectorAll('fieldset');
 
 const setValidateAdvertForm = () => {
@@ -38,12 +38,12 @@ const setValidateAdvertForm = () => {
 };
 
 const setDisabledAdvertForm = () => {
-  setDisabledModifierClass(advertForm);
+  toggledDisabledModifierClass(advertForm, advertFormDisabledClasses, true);
   setDisabledElements(advertFormFields);
 };
 
 const setActiveAdvertForm = () => {
-  setActiveModifierClass(advertForm);
+  toggledDisabledModifierClass(advertForm, advertFormDisabledClasses, false);
   setActiveElements(advertFormFields);
 };
 

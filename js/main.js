@@ -4,7 +4,6 @@ import {getElementFromDocument} from './getterGenerationTemplate.js';
 import {setValidateAdvertForm} from './forms/advertForm/advertForm.js';
 import {setDisabledForms, setActiveForms} from './forms/forms.js';
 
-
 const placeExample = getElementFromDocument('#map-canvas');
 const [{author, offer}] = createSimilarAdverts();
 
