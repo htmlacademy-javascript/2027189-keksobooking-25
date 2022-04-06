@@ -31,12 +31,12 @@ const checkValidPrice = (pristineForm, priceField, apartmentTypeField) => {
   const checkPriceField = (value) => Number(value) >= getMinPriceField() && Number(value) <= getMaxPriceApartmentTypeList();
   const setInvalidMessagePrice = (value) => Number(value) < getMinPriceField() ? `Минимальное значение ${getMinPriceField()}` : 'Максимальное значение 100 000';
 
-  priceField.setAttribute('max', getMaxPriceApartmentTypeList());
+  priceField.max = getMaxPriceApartmentTypeList();
   pristineForm.addValidator(priceField, checkPriceField, setInvalidMessagePrice);
 
   const setDataPriceField = (priceElement, priceValue) => {
     priceElement.placeholder = getMinPriceApartmentTypeList()[priceValue];
-    priceElement.setAttribute('min', getMinPriceApartmentTypeList()[priceValue]);
+    priceElement.min = getMinPriceApartmentTypeList()[priceValue];
   };
 
   setDataPriceField(priceField, getValueSelectedElement(apartmentTypeField));
