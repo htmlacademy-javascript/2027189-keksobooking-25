@@ -59,6 +59,16 @@ const APARTMENT_NAME_TYPE = {
   hotel: 'Отель',
 };
 
+const MIN_PRICE_FOR_APARTMENT_TYPE = {
+  palace: 10000,
+  flat: 1000,
+  house: 5000,
+  bungalow: 0,
+  hotel: 3000,
+};
+
+const MAX_PRICE_FOR_APARTMENT_TYPE = 100000;
+
 const APARTMENT_CHECKIN_CHECKOUT = [
   '12:00',
   '13:00',
@@ -91,6 +101,8 @@ const getApartmentInfoList = () => APARTMENT_INFO;
 const getSimilarAdvertsCount = () => SIMILAR_ADVERTS_COUNT;
 const getApartmentTypeList = () => APARTMENT_TYPE;
 const getNameApartmentTypeList = () => APARTMENT_NAME_TYPE;
+const getMinPriceApartmentTypeList = () => MIN_PRICE_FOR_APARTMENT_TYPE;
+const getMaxPriceApartmentTypeList = () => MAX_PRICE_FOR_APARTMENT_TYPE;
 const getApartmentCheckinCheckoutList = () => APARTMENT_CHECKIN_CHECKOUT;
 const getFacilitiesTypeList = () => FACILITIES_TYPE;
 const getApartmentPhotosList = () => APARTMENT_PHOTOS;
@@ -105,4 +117,6 @@ export {
   getApartmentPhotosList,
   getNameApartmentTypeList,
   getRoomsOption,
+  getMinPriceApartmentTypeList,
+  getMaxPriceApartmentTypeList,
 };
