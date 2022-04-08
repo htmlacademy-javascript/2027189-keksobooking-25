@@ -39,6 +39,31 @@ const checkValidPrice = (pristineForm, priceField, apartmentTypeField) => {
     priceElement.min = getMinPriceApartmentTypeList()[priceValue];
   };
 
+  const priceFieldSlider = getElementFromDocument('.ad-form__slider');
+
+  noUiSlider.create(priceFieldSlider, {
+    start: [getMinPriceField()],
+    connect: [true, false],
+    tooltips: true,
+    range: {
+      'min': getMinPriceField(),
+      'max': getMaxPriceApartmentTypeList(),
+    },
+    format: {
+      to: function (value) {
+        return Math.round(value);
+      },
+      from: function (value) {
+        return value;
+      },
+    },
+  });
+
+  priceFieldSlider.noUiSlider.on('update', () => {
+    priceField.value = priceFieldSlider.noUiSlider.get();
+    pristineForm.validate(priceField);
+  });
+
   setDataPriceField(priceField, getValueSelectedElement(apartmentTypeField));
   apartmentTypeField.addEventListener('change', (evt) => {
     setDataPriceField(priceField, evt.target.value);
